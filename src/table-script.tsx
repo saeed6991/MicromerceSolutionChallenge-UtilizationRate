@@ -18,12 +18,18 @@ import type { SourceDataType, TableDataType } from "./types";
  * @prop {number} june - The value for June.
  * @prop {number} july - The value for July.
  * @prop {number} netEarningsPrevMonth - The net earnings for the previous month.
+ * @prop {number} utilizationRateOverall - The net earnings for the previous month.
+ * @prop {number} totalCostPerCustomer - The net earnings for the previous month.
+ * 
+ * 
  */
 
 const tableData: TableDataType[] = (
   sourceData as unknown as SourceDataType[]
 ).map((dataRow, index) => {
-  const person = `${dataRow?.employees?.firstname} - ...`;
+  const person = `${dataRow?.employees?.firstname} - ...`; // extract the utilization rate like this
+  const utilizationRate = `${dataRow?.employees?.workforceUtilisation?.utilisationRateOverall}`;
+  const totalCostPerCustomer = `${dataRow?.employees?.workforceUtilisation?.totalCostPerCustomer}`;
 
   const row: TableDataType = {
     person: `${person}`,
@@ -33,6 +39,8 @@ const tableData: TableDataType[] = (
     june: `june ${index} placeholder`,
     july: `july ${index} placeholder`,
     netEarningsPrevMonth: `netEarningsPrevMonth ${index} placeholder`,
+    utilizationRateOverall: `utilizationRateOverall ${utilizationRate}`,
+    totalCostPerCustomer: `totalCostPerCustomer ${totalCostPerCustomer}`
   };
 
   return row;
@@ -68,6 +76,14 @@ const Example = () => {
       {
         accessorKey: "netEarningsPrevMonth",
         header: "Net Earnings Prev Month",
+      },
+      {
+        accessorKey: "utilizationRateOverall",
+        header: "utilizationRateOverall",
+      },
+      {
+        accessorKey: "totalCostPerCustomer",
+        header: "totalCostPerCustomer",
       },
     ],
     []
