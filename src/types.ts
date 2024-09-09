@@ -135,4 +135,6 @@ export type TableDataType = {
   june: string;
   july: string;
   netEarningsPrevMonth: string;
+  utilizationRateOverall: string;
+  totalCostPerCustomer: string;
 };
